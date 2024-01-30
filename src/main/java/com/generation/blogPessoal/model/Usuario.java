@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,18 +21,23 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "tb_usuario")
 public class Usuario {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@NotNull(message = "O nome é obrigatório.")
 	private String nome;
+	
+	@Schema(example = "email@email.com")
 	@NotNull(message = "O usuário é obrigatório.")
 	@Email(message = "O email deve ser um email valido.")
 	private String usuario;
+	
 	@NotBlank(message = "A senha é obrigatória.")
 	@Size(min = 8, message = "A senha precisa conter no minimo 8 caracteres")
 	private String senha;
+	
 	@Size(max = 5000, message = "O link da foto deve conter no máximo 5000 caracteres.")
 	private String foto;
 	
